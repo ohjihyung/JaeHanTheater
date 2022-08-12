@@ -22,6 +22,9 @@ public interface View2 {
 	
 	//게시판  -- 전재한 
 	int BOARD = 4;
+	// TODO: 게시판을 선택하는 인터페이스를 추가함, 순서변경 필요하다면 수정 필요
+	int BOARD_SELECT = 44;
+	/**/
 	int BOARD_WRITE = 41;
 	int BOARD_MODIFY = 42;
 	int BOARD_DELETE = 43;
