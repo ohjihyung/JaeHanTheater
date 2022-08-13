@@ -2,50 +2,39 @@ package util;
 
 public interface View2 {
 	
-	// 메인메뉴 
+	// 홈 -- 전재한
 	int HOME = 1;
-	
-	// 비회원   
-	int NONEUSER = 3;
-	
-	// 회원가입, 로그인   -- 김슬기  
-	int USER = 2;
-	int USER_SIGNUP = 21;
-	int USER_LOGIN = 22;
+	int SIGNUP = 11;
+	int LOGIN = 12;
 	
 	
-	// 로그인한 회원정보 보기 --박민지 
-	int USER_STATUS = 23;
-	int USER_MODIFY = 24;
-	int USER_REVIEW = 25;
+	// 유저   -- 전재한
+	int USER_STATUS = 21;
+	int USER_MODIFY = 22;
+	int USER_REVIEW = 23;
 	
 	
-	//게시판  -- 전재한 
-	int BOARD = 4;
-	// TODO: 게시판을 선택하는 인터페이스를 추가함, 순서변경 필요하다면 수정 필요
-	int BOARD_SELECT = 44;
-	/**/
-	int BOARD_WRITE = 41;
-	int BOARD_MODIFY = 42;
-	int BOARD_DELETE = 43;
+	// 게시판  -- 박민지 
+	int BOARD = 3;
+	int BOARD_SELECT = 31;
+	int BOARD_WRITE = 32;
+	int BOARD_MODIFY = 33;
+	int BOARD_DELETE = 34;
 	
 	
-	// 연극보여주기 --박민지
-	int DRAMA = 5;
-	int DRAMAINFO = 51;
-	int DRAMAREVIEW = 52;
+	// 연극 -- 오지형
+	int DRAMA = 4;
+	int DRAMA_INFO = 41;
+	int DRAMA_REVIEW = 42;
+	int DRAMA_TICKETTING = 44;
+	int DRAMA_REFUND = 45;
 	
-	
-	//예매 , 환불  --전재한 
-	int TICKETTING = 61;
-	int REFUND = 62;
 	
 	// 리뷰  -- 김슬기
-	
-	int REVIEW = 7;
-	int REVIEW_WRITE = 71;
-	int REVIEW_MODIFY = 72;
-	int REVIEW_DELETE = 73;
+	int REVIEW = 5;
+	int REVIEW_WRITE = 51;
+	int REVIEW_MODIFY = 52;
+	int REVIEW_DELETE = 53;
 
 	
 	

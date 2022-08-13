@@ -1,11 +1,18 @@
 package controller;
 
+import java.util.Map;
+
 import service.BoardService;
+import service.RootService;
 import util.ScanUtil;
 import util.View2;
 
 public class ControllerV2 {
+	
+	public static boolean loggedInUser = false;
+	public static Map<String, Object> userInfo = null;
 
+	RootService rootService = RootService.getInstance();
 	BoardService boardService = BoardService.getInstance();
 
 	public static void main(String[] args) {
@@ -21,8 +28,13 @@ public class ControllerV2 {
 			case View2.HOME:
 				view = home();
 				break;
-			case View2.USER_LOGIN:
+			case View2.SIGNUP:
+				view = rootService.signUp();
 				break;
+			case View2.LOGIN:
+				view = rootService.login();
+				break;
+				
 			case View2.BOARD:
 				view = boardService.showBoard();
 				break;
@@ -46,16 +58,18 @@ public class ControllerV2 {
 
 	private int home() {
 		System.out.println("=============+++ 재한 극장 +++===================");
-		System.out.println(" 1.로그인  2. 회원가입 3. 테스트");
+		System.out.println(" 1. 연극 2. 게시판 3. 로그인 4.회원가입");
 		System.out.println("=================================================");
-		System.out.print("입력>>");
+		System.out.print("입력 >>> ");
 		switch (ScanUtil.nextInt()) {
 		case 1:
-			return View2.USER_LOGIN;
+			return View2.DRAMA;
 		case 2:
-			return View2.USER_SIGNUP;
-		case 3:
 			return View2.BOARD;
+		case 3:
+			return View2.LOGIN;
+		case 4:
+			return View2.SIGNUP;
 		default:
 			return View2.HOME;
 		}
