@@ -6,6 +6,7 @@ public interface View2 {
 	int HOME = 1;
 	int SIGNUP = 11;
 	int LOGIN = 12;
+	int LOGOUT = 13;
 	
 	
 	// 유저   -- 전재한

@@ -1,11 +1,9 @@
 package service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import controller.ControllerV2;
-
-import java.util.ArrayList;
-
 import dao.RootDAO;
 import util.ScanUtil;
 import util.View2;
@@ -62,10 +60,22 @@ public class RootService {
 		System.out.print("비밀번호 >>> ");
 		String userPass = ScanUtil.nextLine();
 		ControllerV2.userInfo = dao.login(userID, userPass);
-		if (ControllerV2.userInfo == null || ControllerV2.userInfo.size() == 0) {
-			
+		if (ControllerV2.userInfo == null
+				|| ControllerV2.userInfo.size() == 0) {
+			System.out.println("계정이 없거나 비밀번호가 일치하지 않습니다.");
+		} else {
+			ControllerV2.loggedInUser = true;
+			Object nick = ControllerV2.userInfo.get("USER_NICK");
+			System.out.println(nick + "님, 환영합니다.");
 		}
-		return 0;
+		return View2.HOME;
+	}
+
+	public int logout() {
+		ControllerV2.loggedInUser = false;
+		ControllerV2.userInfo = null;
+		System.out.println("로그아웃되었습니다.");
+		return View2.HOME;
 	}
 
 }

@@ -8,7 +8,7 @@ import util.ScanUtil;
 import util.View2;
 
 public class ControllerV2 {
-	
+
 	public static boolean loggedInUser = false;
 	public static Map<String, Object> userInfo = null;
 
@@ -20,7 +20,7 @@ public class ControllerV2 {
 	}
 
 	private void start() {
-		
+
 		int view = View2.HOME;
 
 		while (true) {
@@ -34,7 +34,10 @@ public class ControllerV2 {
 			case View2.LOGIN:
 				view = rootService.login();
 				break;
-				
+			case View2.LOGOUT:
+				view = rootService.logout();
+				break;
+
 			case View2.BOARD:
 				view = boardService.showBoard();
 				break;
@@ -58,7 +61,11 @@ public class ControllerV2 {
 
 	private int home() {
 		System.out.println("=============+++ 재한 극장 +++===================");
-		System.out.println(" 1. 연극 2. 게시판 3. 로그인 4.회원가입");
+		if (!loggedInUser) {
+			System.out.println(" 1. 연극 2. 게시판 3. 로그인 4. 회원가입");
+		} else {
+			System.out.println(" 1. 연극 2. 게시판 3. 마이페이지 4. 로그아웃");
+		}
 		System.out.println("=================================================");
 		System.out.print("입력 >>> ");
 		switch (ScanUtil.nextInt()) {
@@ -67,9 +74,15 @@ public class ControllerV2 {
 		case 2:
 			return View2.BOARD;
 		case 3:
-			return View2.LOGIN;
+			if (!loggedInUser) {
+				return View2.LOGIN;
+			}
+			return View2.USER_STATUS;
 		case 4:
-			return View2.SIGNUP;
+			if (!loggedInUser) {
+				return View2.SIGNUP;
+			}
+			return View2.LOGOUT;
 		default:
 			return View2.HOME;
 		}

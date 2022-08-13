@@ -48,9 +48,10 @@ public class RootDAO {
 	public Map<String, Object> login(String userID, String userPass) {
 		sql = "     SELECT *                                                  "
 				+ "   FROM CLIENT                                             "
-				+ "  WHERE USER_ID='" + userID + "                            "
-				+ "'       AND USER_PW=' " + userPass + " '                   ";
-		return null;
+				+ "  WHERE USER_ID='" + userID + "'                           "
+				+ "        AND USER_PW='" + userPass + "'                     ";
+		Map<String, Object> row = jdbc.selectOne(sql);
+		return row;
 	}
 
 }
