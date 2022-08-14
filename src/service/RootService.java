@@ -30,6 +30,12 @@ public class RootService {
 		String userID = ScanUtil.nextLine();
 		System.out.print("비밀번호 >>> ");
 		String userPass = ScanUtil.nextLine();
+		System.out.print("비밀번호 확인 >>> ");
+		String confirmPass = ScanUtil.nextLine();
+		if (!(userPass.equals(confirmPass))) {
+			System.out.println("비밀번호 확인이 일치하지 않습니다.");
+			return View2.HOME;
+		}
 		System.out.print("닉네임 >>> ");
 		String userNick = ScanUtil.nextLine();
 		System.out.print("이름 >>> ");

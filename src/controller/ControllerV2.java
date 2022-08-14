@@ -2,8 +2,9 @@ package controller;
 
 import java.util.Map;
 
-import service.BoardService;
 import service.RootService;
+import service.UserService;
+import service.BoardService;
 import util.ScanUtil;
 import util.View2;
 
@@ -13,6 +14,7 @@ public class ControllerV2 {
 	public static Map<String, Object> userInfo = null;
 
 	RootService rootService = RootService.getInstance();
+	UserService userService = UserService.getInstance();
 	BoardService boardService = BoardService.getInstance();
 
 	public static void main(String[] args) {
@@ -36,6 +38,25 @@ public class ControllerV2 {
 				break;
 			case View2.LOGOUT:
 				view = rootService.logout();
+				break;
+
+			case View2.USER:
+				view = userService.showPage();
+				break;
+			case View2.USER_STATUS:
+				view = userService.showStatus();
+				break;
+			case View2.USER_MODIFY:
+				view = userService.modifyStatus();
+				break;
+			case View2.USER_PASS:
+				view = userService.modifyPass();
+				break;
+			case View2.USER_DRAMA:
+				break;
+			case View2.USER_REVIEW:
+				break;
+			case View2.USER_BOARD:
 				break;
 
 			case View2.BOARD:
@@ -77,7 +98,7 @@ public class ControllerV2 {
 			if (!loggedInUser) {
 				return View2.LOGIN;
 			}
-			return View2.USER_STATUS;
+			return View2.USER;
 		case 4:
 			if (!loggedInUser) {
 				return View2.SIGNUP;

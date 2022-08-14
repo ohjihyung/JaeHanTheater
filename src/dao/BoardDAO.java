@@ -55,6 +55,4 @@ public class BoardDAO {
 		return jdbc.update(sql, param);
 	}
 
-	
-
 }
