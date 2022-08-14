@@ -15,7 +15,7 @@ public interface View2 {
 	int USER_REVIEW = 23;
 	
 	
-	// 게시판  -- 박민지 
+	// 게시판  -- 박민지     // BoardService, BoardDAO
 	int BOARD = 3;
 	int BOARD_SELECT = 31;
 	int BOARD_WRITE = 32;
@@ -23,7 +23,7 @@ public interface View2 {
 	int BOARD_DELETE = 34;
 	
 	
-	// 연극 -- 오지형
+	// 연극 -- 오지형    // DramaService, DramaDAO
 	int DRAMA = 4;
 	int DRAMA_INFO = 41;
 	int DRAMA_REVIEW = 42;
@@ -31,7 +31,7 @@ public interface View2 {
 	int DRAMA_REFUND = 45;
 	
 	
-	// 리뷰  -- 김슬기
+	// 리뷰  -- 김슬기    // ReviewService, ReviewDAO
 	int REVIEW = 5;
 	int REVIEW_WRITE = 51;
 	int REVIEW_MODIFY = 52;
