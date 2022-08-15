@@ -2,6 +2,9 @@ package service;
 
 import java.util.List;
 import java.util.Map;
+
+import controller.ControllerV2;
+
 import java.util.ArrayList;
 
 import dao.BoardDAO;
@@ -24,6 +27,8 @@ public class BoardService {
 
 	BoardDAO dao = BoardDAO.getInstance();
 
+	int selectedBoardId = -1;
+
 	public int showBoard() {
 
 		List<Map<String, Object>> rows = dao.showBoard();
@@ -33,8 +38,7 @@ public class BoardService {
 		if (rows == null || rows.size() == 0) {
 		} else {
 			for (Map<String, Object> item : rows) {
-				System.out.printf("%s %s %s\n", item.get("BOARD_ID"),
-						item.get("BOARD_TITLE"), item.get("BOARD_NICK"));
+				System.out.printf("%s %s %s\n", item.get("BOARD_ID"), item.get("BOARD_TITLE"), item.get("BOARD_NICK"));
 			}
 		}
 
@@ -60,53 +64,131 @@ public class BoardService {
 	}
 
 	public int selectBoard() {
+		Map<String, Object> row = null;
+		int input = -1;
+		if (selectedBoardId > 0) {
+			row = dao.selectBoard(selectedBoardId);
+		} else {
 
-		System.out.print("게시판 번호 입력 >>> ");
-		int input = ScanUtil.nextInt();
-
-		Map<String, Object> row = dao.selectBoard(input);
+			System.out.print("게시판 번호 입력 >>> ");
+			input = ScanUtil.nextInt();
+			row = dao.selectBoard(input);
+		}
 
 		if (row == null || row.size() == 0) {
 			System.out.println("글이 존재하지 않습니다");
 			return View2.BOARD;
-		}
+		} else {
+			selectedBoardId = input;
 
-		System.out.println(row);
+			System.out.println(row);
 
-		while (true) {
-			System.out.println("1. 게시판 수정 2. 게시판 삭제 0. 나가기");
-			System.out.print("입력 >>> ");
-			switch (ScanUtil.nextInt()) {
-			case 1:
-				return View2.BOARD_MODIFY;
-			case 2:
-				return View2.BOARD_DELETE;
-			case 0:
-				return View2.BOARD;
+			while (true) {
+				System.out.println("1. 게시판 수정 2. 게시판 삭제 0. 나가기");
+				System.out.print("입력 >>> ");
+				switch (ScanUtil.nextInt()) {
+				case 1:
+					if (checkUser()) {						
+						return View2.BOARD_MODIFY;
+						
+					}
+					break;
+				case 2:
+					if (checkUser()) {
+						return View2.BOARD_DELETE;
+					}
+					break;
+				case 0:
+					selectedBoardId = -1;
+					return View2.BOARD;
 
-			default:
-				break;
+				default:
+					break;
+				}
 			}
 		}
 	}
 
 	public int writeBoard() {
+		Object nickName = null;
+		Object password = null;
+
 		System.out.print("게시판 제목 >>> ");
 		String title = ScanUtil.nextLine();
 		System.out.print("게시판 내용 >>> ");
 		String content = ScanUtil.nextLine();
-		System.out.print("게시판 닉네임 >>> ");
-		String nickName = ScanUtil.nextLine();
-		System.out.print("게시판 비밀번호 >>> ");
-		String password = ScanUtil.nextLine();
+
+		if (ControllerV2.loggedInUser == false) {
+			System.out.print("게시판 닉네임 >>> ");
+			nickName = ScanUtil.nextLine();
+			System.out.print("게시판 비밀번호 >>> ");
+			password = ScanUtil.nextLine();
+		} else {
+			nickName = ControllerV2.userInfo.get("USER_NICK");
+		}
 		List<Object> param = new ArrayList<>();
 		param.add(title);
 		param.add(content);
 		param.add(nickName);
 		param.add(password);
 		int result = dao.writeBoard(param);
-		System.out.println(result + "개 수정됨");
+		System.out.println(result + "개 작성됨");
 		return View2.BOARD;
 	}
+	
+	
+	public boolean checkUser() {
+		if (ControllerV2.loggedInUser == false) {
+			System.out.print("비밀번호를 입력하세요 >>> ");
+			String pw = ScanUtil.nextLine();
+			Map<String, Object> row = dao.selectBoardPw(selectedBoardId);
+			if (!pw.equals(row.get("BOARD_PW"))) {
+				System.out.println("비밀번호가 틀렸습니다.");
+				return false;
+			}
+		} else {
+			Object nick1 = ControllerV2.userInfo.get("USER_NICK");
+			Map<String, Object> nick2 = dao.selectBoardNick(selectedBoardId);
+			if (!nick1.equals(nick2.get("BOARD_NICK"))) {
+				System.out.println("잘못된 접근입니다.");
+				return false;
+			}
+		}
+		return true;
+	}
 
+	
+	
+	public int modifyBoard() {
+		System.out.println("----------선택-----------");
+		System.out.println("1.제목 수정 2.내용 수정 ");
+		System.out.println("---------------------------");
+		System.out.print("번호를 입력하세요 >>> ");
+		int num = ScanUtil.nextInt();
+		System.out.print("수정 입력 >>> ");
+		String value = ScanUtil.nextLine();
+		int result = dao.modifyBoard(num, value, selectedBoardId);
+		if(result > 0) {
+			System.out.println(result + "개가 수정되었습니다.");
+			selectedBoardId = -1;
+			return View2.BOARD;
+		}else {
+			System.out.println("수정 실패");
+			return View2.BOARD_SELECT;
+		}
+	}
+
+	
+	
+	public int deleteBoard() {
+		int result = dao.deleteBoard(selectedBoardId); 
+		if (result > 0) {
+			System.out.println(result + "개가 삭제되었습니다.");
+			selectedBoardId = -1;
+			return View2.BOARD;
+		} else {
+			System.out.println("삭제 실패");
+			return View2.BOARD_SELECT;
+		}
+	}
 }

@@ -24,7 +24,8 @@ public class BoardDAO {
 	String sql = null;
 
 	public List<Map<String, Object>> showBoard() {
-		sql = " SELECT * FROM BOARD ";
+		sql = " SELECT * FROM BOARD "
+				+ "ORDER BY BOARD_ID ASC";
 		List<Map<String, Object>> rows = jdbc.selectList(sql);
 		return rows;
 	}
@@ -55,4 +56,52 @@ public class BoardDAO {
 		return jdbc.update(sql, param);
 	}
 
+	public Map<String, Object> selectBoardPw(int selectedBoardId){
+		//비회원일때
+		sql =	" SELECT BOARD_PW "
+				+ " FROM BOARD "
+				+ " WHERE BOARD_ID = '" + selectedBoardId + "' ";
+	//	Map<String, Object> row = jdbc.selectOne(sql);
+		return jdbc.selectOne(sql);
+		
+	}
+
+	public Map<String, Object> selectBoardNick(int selectedBoardId){
+		//회원일때
+		sql = " SELECT BOARD_NICK "
+				+ " FROM BOARD "
+				+ " WHERE BOARD_ID = '" + selectedBoardId + "' ";
+		//	Map<String, Object> row = jdbc.selectOne(sql);
+		return jdbc.selectOne(sql);
+		
+	}
+	
+	public int deleteBoard(int selectedBoardId) {
+		sql = " DELETE FROM BOARD " + 
+			  " WHERE BOARD_ID = '" + selectedBoardId + "' ";
+							
+		return jdbc.update(sql);
+		
+	}
+	
+	public int modifyBoard(int num, String value, int selectedBoardId) {
+		sql = " UPDATE BOARD "
+				+ " SET ";
+		switch(num) {
+		case 1:
+			sql += " BOARD_TITLE = ";
+			break;
+		case 2:
+			sql += "BOARD_WRITE = ";
+			break;
+		}		
+		sql += " '" + value + "' ";
+		sql +=  " WHERE BOARD_ID = '" + selectedBoardId + "' ";
+		
+		return jdbc.update(sql);
+		
+	}
+	
+	
+	
 }

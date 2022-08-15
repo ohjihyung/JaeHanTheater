@@ -69,10 +69,10 @@ public class ControllerV2 {
 				view = boardService.writeBoard();
 				break;
 			case View2.BOARD_MODIFY:
-				view = boardService.selectBoard();
+				view = boardService.modifyBoard();
 				break;
 			case View2.BOARD_DELETE:
-				view = boardService.selectBoard();
+				view = boardService.deleteBoard();
 				break;
 			}
 
