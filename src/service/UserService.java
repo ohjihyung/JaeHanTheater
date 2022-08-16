@@ -21,7 +21,7 @@ public class UserService {
 		return instance;
 	}
 
-	UserDAO dao = UserDAO.getInstance();
+	UserDAO userDAO = UserDAO.getInstance();
 
 	public int showPage() {
 		Object nick = ControllerV2.userInfo.get("USER_NICK");
@@ -36,6 +36,7 @@ public class UserService {
 			System.out.print("입력 >>> ");
 			switch (ScanUtil.nextInt()) {
 			case 0:
+				ControllerV2.pageStatus = false;
 				return View2.HOME;
 			case 1:
 				return View2.USER_STATUS;
@@ -83,9 +84,9 @@ public class UserService {
 		int userNum = ScanUtil.nextInt();
 		System.out.print("수정할 유저정보 값 입력 >>> ");
 		String userValue = ScanUtil.nextLine();
-		int result = dao.userModify(userNum, userValue);
+		int result = userDAO.userModify(userNum, userValue);
 		System.out.println(result + "개 유저정보 수정됨");
-		ControllerV2.userInfo = dao.getUserInfo();
+		ControllerV2.userInfo = userDAO.getUserInfo();
 		return View2.USER_STATUS;
 	}
 
@@ -102,10 +103,33 @@ public class UserService {
 		} else if (!(anotherPass.equals(confirmPass))) {
 			System.out.println("비밀번호 확인이 일치하지 않습니다.");
 		} else {
-			int result = dao.modifyPass(anotherPass);
+			int result = userDAO.modifyPass(anotherPass);
 			System.out.println(result + "개 비밀번호 변경");
 		}
 		return View2.USER_STATUS;
+	}
+
+	public int showUserBoard() {
+		Map<String, Object> row = userDAO.showUserBoard();
+		if (row == null || row.size() == 0) {
+			System.out.println("유저가 작성한 게시판이 없습니다.");
+			return View2.USER_STATUS;
+		} else {
+			System.out.println(row);
+			System.out.println("1. 선택, 0. 나가기");
+			while (true) {
+				System.out.print("입력 >>> ");
+				switch (ScanUtil.nextInt()) {
+				case 1:
+					return View2.BOARD_SELECT;
+				case 0:
+					return View2.USER;
+
+				default:
+					break;
+				}
+			}
+		}
 	}
 
 }

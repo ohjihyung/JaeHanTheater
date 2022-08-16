@@ -38,7 +38,8 @@ public class BoardService {
 		if (rows == null || rows.size() == 0) {
 		} else {
 			for (Map<String, Object> item : rows) {
-				System.out.printf("%s %s %s\n", item.get("BOARD_ID"), item.get("BOARD_TITLE"), item.get("BOARD_NICK"));
+				System.out.printf("%s %s %s\n", item.get("BOARD_ID"),
+						item.get("BOARD_TITLE"), item.get("BOARD_NICK"));
 			}
 		}
 
@@ -88,9 +89,9 @@ public class BoardService {
 				System.out.print("입력 >>> ");
 				switch (ScanUtil.nextInt()) {
 				case 1:
-					if (checkUser()) {						
+					if (checkUser()) {
 						return View2.BOARD_MODIFY;
-						
+
 					}
 					break;
 				case 2:
@@ -100,7 +101,8 @@ public class BoardService {
 					break;
 				case 0:
 					selectedBoardId = -1;
-					return View2.BOARD;
+					return ControllerV2.pageStatus ? View2.USER_BOARD
+							: View2.BOARD;
 
 				default:
 					break;
@@ -135,8 +137,7 @@ public class BoardService {
 		System.out.println(result + "개 작성됨");
 		return View2.BOARD;
 	}
-	
-	
+
 	public boolean checkUser() {
 		if (ControllerV2.loggedInUser == false) {
 			System.out.print("비밀번호를 입력하세요 >>> ");
@@ -157,9 +158,7 @@ public class BoardService {
 		return true;
 	}
 
-	
-	
-	public int modifyBoard() {
+	public int modifyBoard(boolean pageStatus) {
 		System.out.println("----------선택-----------");
 		System.out.println("1.제목 수정 2.내용 수정 ");
 		System.out.println("---------------------------");
@@ -168,24 +167,22 @@ public class BoardService {
 		System.out.print("수정 입력 >>> ");
 		String value = ScanUtil.nextLine();
 		int result = dao.modifyBoard(num, value, selectedBoardId);
-		if(result > 0) {
+		if (result > 0) {
 			System.out.println(result + "개가 수정되었습니다.");
 			selectedBoardId = -1;
-			return View2.BOARD;
-		}else {
+			return pageStatus ? View2.USER_BOARD : View2.BOARD;
+		} else {
 			System.out.println("수정 실패");
 			return View2.BOARD_SELECT;
 		}
 	}
 
-	
-	
-	public int deleteBoard() {
-		int result = dao.deleteBoard(selectedBoardId); 
+	public int deleteBoard(boolean pageStatus) {
+		int result = dao.deleteBoard(selectedBoardId);
 		if (result > 0) {
 			System.out.println(result + "개가 삭제되었습니다.");
 			selectedBoardId = -1;
-			return View2.BOARD;
+			return pageStatus ? View2.USER_BOARD : View2.BOARD;
 		} else {
 			System.out.println("삭제 실패");
 			return View2.BOARD_SELECT;

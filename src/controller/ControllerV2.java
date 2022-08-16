@@ -12,6 +12,7 @@ public class ControllerV2 {
 
 	public static boolean loggedInUser = false;
 	public static Map<String, Object> userInfo = null;
+	public static boolean pageStatus = false;
 
 	RootService rootService = RootService.getInstance();
 	UserService userService = UserService.getInstance();
@@ -41,6 +42,7 @@ public class ControllerV2 {
 				break;
 
 			case View2.USER:
+				pageStatus = true;
 				view = userService.showPage();
 				break;
 			case View2.USER_STATUS:
@@ -53,10 +55,15 @@ public class ControllerV2 {
 				view = userService.modifyPass();
 				break;
 			case View2.USER_DRAMA:
+//				view = userService.
+				break;
+			case View2.USER_REFUND:
 				break;
 			case View2.USER_REVIEW:
+//				view = userService.showUserReview();
 				break;
 			case View2.USER_BOARD:
+				view = userService.showUserBoard();
 				break;
 
 			case View2.BOARD:
@@ -69,10 +76,10 @@ public class ControllerV2 {
 				view = boardService.writeBoard();
 				break;
 			case View2.BOARD_MODIFY:
-				view = boardService.modifyBoard();
+				view = boardService.modifyBoard(pageStatus);
 				break;
 			case View2.BOARD_DELETE:
-				view = boardService.deleteBoard();
+				view = boardService.deleteBoard(pageStatus);
 				break;
 			}
 

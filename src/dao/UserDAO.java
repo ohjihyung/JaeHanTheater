@@ -24,7 +24,7 @@ public class UserDAO {
 	String sql = null;
 
 	public Map<String, Object> getUserInfo() {
-		Object userID = ControllerV2.userInfo.get("USER_ID");
+		Object userID = ControllerV2.userInfo.get("USER_TITLE");
 		sql = " SELECT * FROM CLIENT WHERE USER_ID='" + userID + "'";
 		Map<String, Object> row = jdbc.selectOne(sql);
 		return row;
@@ -59,12 +59,19 @@ public class UserDAO {
 	}
 
 	public int modifyPass(String anotherPass) {
-		Object userID = ControllerV2.userInfo.get("USER_ID");
+		Object userID = ControllerV2.userInfo.get("USER_TITLE");
 		sql = "    UPDATE CLIENT                                              "
 				+ "   SET USER_PW='" + anotherPass + "'                       "
 				+ " WHERE USER_ID='" + userID + "'                            ";
 		int result = jdbc.update(sql);
 		return result;
+	}
+
+	public Map<String, Object> showUserBoard() {
+		Object userNick = ControllerV2.userInfo.get("USER_NICK");
+		sql = " SELECT * FROM BOARD WHERE BOARD_NICK='" + userNick + "' ";
+		Map<String, Object> row = jdbc.selectOne(sql);
+		return row;
 	}
 
 }
