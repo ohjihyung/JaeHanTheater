@@ -11,6 +11,10 @@ import util.ScanUtil;
 import util.View2;
 
 public class ControllerV2 {
+	
+	//
+	// !?!?!? 먼저 JDBCUtil url, user, password 확인 !?!?!?!?
+	//
 
 	public static boolean loggedInUser = false;
 	public static Map<String, Object> userInfo = null;
@@ -23,6 +27,8 @@ public class ControllerV2 {
 	ReviewService reviewService = ReviewService.getInstance();
 
 	public static void main(String[] args) {
+		theaterlogo();
+		poster();
 		new ControllerV2().start();
 	}
 
@@ -125,13 +131,14 @@ public class ControllerV2 {
 	}
 
 	private int home() {
-		System.out.println("=============+++ 재한 극장 +++===================");
+
+		System.out.println("┌──────────────────────────────────────────────────┐");
 		if (!loggedInUser) {
-			System.out.println(" 1. 연극 2. 게시판 3. 로그인 4. 회원가입");
+			System.out.println("│\t1. 연극 2. 게시판 3. 로그인 4. 회원가입\t   │");
 		} else {
-			System.out.println(" 1. 연극 2. 게시판 3. 마이페이지 4. 로그아웃");
+			System.out.println("│    1. 연극 2. 게시판 3. 마이페이지 4. 로그아웃   │");
 		}
-		System.out.println("=================================================");
+		System.out.println("└──────────────────────────────────────────────────┘");
 		System.out.print("입력 >>> ");
 		switch (ScanUtil.nextInt()) {
 		case 1:
@@ -153,4 +160,52 @@ public class ControllerV2 {
 		}
 
 	}
+	
+	public static void clearScreen() {
+		for (int i = 0; i < 70; i++) {
+			System.out.println();
+		}
+	}
+
+	public static void theaterlogo() {
+		System.out.println("   ____  ____  ____  ____  ____  ____ ");
+		System.out.println("  ||J ||||A ||||E ||||H ||||A ||||N ||");
+		System.out.println("  ||__||||__||||__||||__||||__||||__||");
+		System.out.println("  |/__\\||/__\\||/__\\||/__\\||/__\\||/__\\|");
+		System.out.println("         ____  ____  ____  ____  ____  ____  ____  ");
+		System.out.println("        ||T ||||H ||||E ||||A ||||T ||||E ||||R || ");
+		System.out.println("        ||__||||__||||__||||__||||__||||__||||__|| ");
+		System.out.println("        |/__\\||/__\\||/__\\||/__\\||/__\\||/__\\||/__\\| ");
+		System.out.println();
+		System.out.println("  재한극장에 오신 것을 환영합니다!");
+		ScanUtil.nextLine();
+		clearScreen();
+
+	}
+	
+	public static void poster() {
+
+		System.out.println("⣿⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⣿⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⣿");
+		System.out.println("⣿⠀⠀⠀⠀⠀⠀⠀⠀⣴⠂⣐⣆⠀⠀⠀⠀⠀⠀⠀      ⠀  ⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀	       ⠀⣿");
+		System.out.println("⣿⠀⠀⠀⠀⠀⠀⠀⠀⣹⣷⣿⣏⡀⠀⠀⠀⠀⠀⠀⠀        ⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀     ⣿");
+		System.out.println("⣿⠀⠀⠀⠀⠀⠀⢠⡾⠻⣿⣿⠋⠻⣆⠀⠀⠀⠀⠀    ⠀   ⣿⠀⠀⠀⠀⠀⠀⠀⠀⡖⠒⠒⠒⣒⣲⡆⣶⠀⠀⠀⠀⠀⠀⠀  ⠀⣿");
+		System.out.println("⣿⠀⠀⠀⠀⠀⣀⣾⣶⣾⣧⣿⣷⣶⣽⣆⠀⠀⠀⠀   ⠀   ⣿⠀⠀⠀⠀⠀⠀⠀⠀⠷⠶⠶⠀⢓⣖⣂⡟⠀⠀⠀⠀⠀⠀⠀⠀   ⣿");
+		System.out.println("⣿⠀⠀⠀⣠⡾⠟⡫⠵⠒⢒⡚⠛⠻⣿⣿⣷⣄⠀⠀ ⠀ ⠀⣿⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠉⠁⠘⠿⠿⠇⠀⠀⠀⠀⠀⠀⠀⠀   ⣿");
+		System.out.println("⣿⠀⠀⣪⠟⡴⠋⠐⢦⠀⠸⠇⠀⡰⠀⠙⢿⣿⣷⡀⠀  ⠀⣿⠀⠀⠀⠀⠀⠀⠀⡄⠀⢠⡄⢀⣠⡄⣤⣤⡄⣄⠀⠀⠀⠀⠀⠀  ⣿");
+		System.out.println("⣿⠀⣶⠏⡜⠤⣀⠀⠀⠀⠀⠀⠀⠀ ⠀⡠⠖⢻⣿⣷⡀  ⠀⣿⠀⠀⠀⠀⠀⢠⡴⡷⣤⢸⣧⣤⢿⡇⣿⣤⡄⣿⠂⠀⠀⠀⠀   ⣿");
+		System.out.println("⣿⢸⣿⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀  ⠀⠀⠀⠀ ⠀⣿⣿⡇⠀  ⣿⠀⠀⠀⠀⠀⠰⠶⠷⠶⠀⣾⣀⣈⡁⢰⣆⣀⣁⠀⠀⠀⠀⠀   ⣿");
+		System.out.println("⣿⢸⣿⢸⠙⠙⡀⠠⠀⠒⠘⠣⠀⠀⠀⠀⠛⠛⣿⣿⡇⠀  ⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀     ⠀⣿");
+		System.out.println("⣿⠈⣿⡌⡄⡴⡖⠀⠀⡀⠀⠂⠤⡄⠀⣦⣄⢠⣿⣿⠃ ⠀ ⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀     ⠀⠀⣿");
+		System.out.println("⣿⠀⠸⣷⣜⢬⠀⢀⣖⠀⠐⢄⢀⢆⠀⠀⣡⣿⣿⠏⠀  ⠀ ⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⠀⠀   ⠀    ⣿");
+		System.out.println("⣿⠀⠀⠐⢽⣷⣵⣬⣃⡑⠤⠤⢂⣀⣥⣾⣿⡿⠋⠀⠀⠀  ⡇⠀⠀⣨⣇⠶⠀⠀⠀⠀⠀⠀⠀⢠⠀⠀⠀⠀⠀⠀⢹⣦⡀⠀   ⠀⣿");
+		System.out.println("⣿⠀⠀⠀⠀⠉⢻⣿⣿⢿⣿⣿⣿⣿⣿⡟⠋⠀⠀⠀⠀ ⠀  ⡇⠀⢠⣶⣶⠂⠀⠀⣸⠀⠀⠀⠀⣿⡀⠀⢂⠀⠀⠀⣼⣿⢠⠀    ⣿");
+		System.out.println("⣿⠀⠀⠀⠀⠀⠀⠀⠀⠈⠈⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀     ⠀ ⣧⣀⣸⣷⣿⡗⠀⠀⢿⡇⠀⠀⠘⠿⡇⠀⣼⠀⠀⢻⣿⣯⣇⢀  ⣿");
+		System.out.println("⣿⢀⢧⢸⢈⠃⡇⣿⣿⠀⢸⡇⡇⡷⠦⠀⢘⣃⡃⣛⣸⠀ ⣿⠿⣿⡿⣿⠓⠒⠒⣿⠗⠒⠂⠀⠰⡕⣿⡓⠘⠛⣿⡿⣿⢿⠛⣿");
+		System.out.println("⣿⠈⠈⠀⠈⠉⠁⠉⠉⠀⠈⠉⠁⠉⠉⠀⠈⠉⠁⠉⠉⠀ ⣿⠤⣿⠃⠿⠀⠀⠀⠀⠁⠀⠀⠀⠘⠃⠀⠀⠀⠀⠠⠿⠷⡟⠉⠁ ⣿");
+		System.out.println("⣿⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣿⣼⣿⣿⣧⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣦⣿⣿⣷⣿");
+		System.out.println("시간을 파는 상점 \t 드립소년단");
+		ScanUtil.nextLine();
+		clearScreen();
+	}
+	
 }

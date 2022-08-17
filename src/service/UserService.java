@@ -27,11 +27,13 @@ public class UserService {
 		Object nick = ControllerV2.userInfo.get("USER_NICK");
 		System.out.println("------");
 		System.out.println("'" + nick + "'님 환영합니다.");
-		System.out.println("0. 홈으로 돌아가기");
-		System.out.println("1. 내 정보 보기");
-		System.out.println("2. 내 예매내역 보기");
-		System.out.println("3. 내 리뷰보기");
-		System.out.println("4. 내 자유게시판 보기");
+		System.out.println("┌───────────────────────┐");
+		System.out.println("│ 0. 홈으로 돌아가기    │");
+		System.out.println("│ 1. 내 정보 보기       │");
+		System.out.println("│ 2. 내 예매내역 보기   │");
+		System.out.println("│ 3. 내 리뷰보기        │");
+		System.out.println("│ 4. 내 자유게시판 보기 │");
+		System.out.println("└───────────────────────┘");
 		while (true) {
 			System.out.print("입력 >>> ");
 			switch (ScanUtil.nextInt()) {
@@ -55,13 +57,18 @@ public class UserService {
 
 	public int showStatus() {
 		Map<String, Object> userInfo = ControllerV2.userInfo;
+		System.out.println("════════════ 내 정보 ════════════");
 		System.out.println("아이디 : " + userInfo.get("USER_ID"));
 		System.out.println("닉네임 : " + userInfo.get("USER_NICK"));
 		System.out.println("이름 : " + userInfo.get("USER_NAME"));
-		System.out.println("생년월일 : " + userInfo.get("USER_BIRTH"));
+		System.out.print("생년월일 : " );
+		System.out.printf("%tF\n", userInfo.get("USER_BIRTH"));
 		System.out.println("전화번호 : " + userInfo.get("USER_PHONE"));
 		System.out.println("이메일 : " + userInfo.get("USER_EMAIL"));
-		System.out.println("1. 회원정보 수정 2. 비밀번호 수정 0. 나가기");
+		System.out.println("═════════════════════════════════");
+		System.out.println("┌───────────────────────────────────────────────┐");
+		System.out.println("│  1. 회원정보 수정 2. 비밀번호 수정 0. 나가기  │");
+		System.out.println("└───────────────────────────────────────────────┘");
 		while (true) {
 			System.out.print("입력 >>> ");
 			switch (ScanUtil.nextInt()) {
@@ -79,7 +86,9 @@ public class UserService {
 	}
 
 	public int modifyStatus() {
-		System.out.println("1. 닉네임 2. 이름 3. 생년월일 4. 전화번호 5. 이메일");
+		System.out.println("┌───────────────────────────────────────────────────────┐");
+		System.out.println("│  1. 닉네임 2. 이름 3. 생년월일 4. 전화번호 5. 이메일  │");
+		System.out.println("└───────────────────────────────────────────────────────┘");
 		System.out.print("수정할 유저정보 번호 입력 >>> ");
 		int userNum = ScanUtil.nextInt();
 		System.out.print("수정할 유저정보 값 입력 >>> ");

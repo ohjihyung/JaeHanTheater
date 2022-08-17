@@ -25,27 +25,29 @@ public class RootService {
 	RootDAO dao = RootDAO.getInstance();
 
 	public int signUp() {
-		System.out.println("--- 회원가입 ---");
-		System.out.print("아이디 >>> ");
+		System.out.println("┌───────────── 회원가입 ─────────────┐");
+		System.out.print(" 아이디 >>> ");
 		String userID = ScanUtil.nextLine();
-		System.out.print("비밀번호 >>> ");
+		System.out.print(" 비밀번호 >>> ");
 		String userPass = ScanUtil.nextLine();
-		System.out.print("비밀번호 확인 >>> ");
+		System.out.print(" 비밀번호 확인 >>> ");
 		String confirmPass = ScanUtil.nextLine();
 		if (!(userPass.equals(confirmPass))) {
-			System.out.println("비밀번호 확인이 일치하지 않습니다.");
+			System.out.println(" 비밀번호 확인이 일치하지 않습니다.");
+			System.out.println("└────────────────────────────────────┘");
 			return View2.HOME;
 		}
-		System.out.print("닉네임 >>> ");
+		System.out.print(" 닉네임 >>> ");
 		String userNick = ScanUtil.nextLine();
-		System.out.print("이름 >>> ");
+		System.out.print(" 이름 >>> ");
 		String userName = ScanUtil.nextLine();
-		System.out.print("생년월일 >>> ");
+		System.out.print(" 생년월일 >>> ");
 		String userBirth = ScanUtil.nextLine();
-		System.out.print("휴대폰 번호 >>> ");
+		System.out.print(" 휴대폰 번호 >>> ");;
 		String userPhone = ScanUtil.nextLine();
-		System.out.print("이메일 >>> ");
+		System.out.print(" 이메일 >>> ");
 		String userEmail = ScanUtil.nextLine();
+		System.out.println("└────────────────────────────────────┘");
 		List<Object> param = new ArrayList<>();
 		param.add(userID);
 		param.add(userPass);
@@ -55,15 +57,16 @@ public class RootService {
 		param.add(userPhone);
 		param.add(userEmail);
 		int result = dao.signUp(param);
-		System.out.println("회원가입 " + result + "개 수행됨");
+		System.out.println(param.get(2) + "님, 가입이 완료되었습니다.");
+		System.out.println();
 		return View2.HOME;
 	}
 
 	public int login() {
-		System.out.println("--- 로그인 ---");
-		System.out.print("아이디 >>> ");
+		System.out.println("┌───── 로그인 ─────┐");
+		System.out.print(" 아이디 >>> ");
 		String userID = ScanUtil.nextLine();
-		System.out.print("비밀번호 >>> ");
+		System.out.print(" 비밀번호 >>> ");
 		String userPass = ScanUtil.nextLine();
 		ControllerV2.userInfo = dao.login(userID, userPass);
 		if (ControllerV2.userInfo == null
@@ -72,7 +75,7 @@ public class RootService {
 		} else {
 			ControllerV2.loggedInUser = true;
 			Object nick = ControllerV2.userInfo.get("USER_NICK");
-			System.out.println(nick + "님, 환영합니다.");
+			System.out.println(nick + "님, 방문을 환영합니다.");
 		}
 		return View2.HOME;
 	}

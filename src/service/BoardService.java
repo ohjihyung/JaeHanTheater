@@ -33,20 +33,23 @@ public class BoardService {
 
 		List<Map<String, Object>> rows = dao.showBoard();
 
-		System.out.println("--- 게시판 리스트 ---");
+		System.out.println("▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰ 게시판 리스트 ▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰");
 
+		System.out.printf("%s\t%s\t\t%-35s\t%s\n", "번호","날짜","제목","작성자");
+		System.out.println("─────────────────────────────────────────────────────────────────────────");
 		if (rows == null || rows.size() == 0) {
 		} else {
 			for (Map<String, Object> item : rows) {
-				System.out.printf("%s %s %s\n", item.get("BOARD_ID"),
-						item.get("BOARD_TITLE"), item.get("BOARD_NICK"));
+				System.out.printf("%s\t%tF\t%-30s\t%s\n", item.get("BOARD_ID"), item.get("BOARD_DATE"), item.get("BOARD_TITLE"), item.get("BOARD_NICK"));
 			}
 		}
 
 		System.out.println("------");
 
 		while (true) {
-			System.out.println("1. 게시판 선택 2. 게시판 작성 0. 게시판 나가기");
+			System.out.println("┌──────────────────────────────────────────────────┐");
+			System.out.println("│  1. 게시판 선택 2. 게시판 작성 0. 게시판 나가기  │");
+			System.out.println("└──────────────────────────────────────────────────┘");
 			System.out.print("입력 >>> ");
 
 			switch (ScanUtil.nextInt()) {
@@ -82,10 +85,21 @@ public class BoardService {
 		} else {
 			selectedBoardId = input;
 
-			System.out.println(row);
+			System.out.println();
+			System.out.println("•─────────────────────────────────────────────•");
+			System.out.println("  " + row.get("BOARD_TITLE") + "\t" + "작성자 : " + row.get("BOARD_NICK"));
+			System.out.println();
+			System.out.println("  " + row.get("BOARD_WRITE"));
+			System.out.println();
+			System.out.println("  " + row.get("BOARD_DATE"));
+			System.out.println("•─────────────────────────────────────────────•");
 
 			while (true) {
-				System.out.println("1. 게시판 수정 2. 게시판 삭제 0. 나가기");
+				
+				System.out.println();
+				System.out.println("┌──────────────────────────────────────────┐");
+				System.out.println("│  1.게시판 수정  2.게시판 삭제  0.나가기  │");
+				System.out.println("└──────────────────────────────────────────┘");
 				System.out.print("입력 >>> ");
 				switch (ScanUtil.nextInt()) {
 				case 1:
@@ -159,9 +173,10 @@ public class BoardService {
 	}
 
 	public int modifyBoard(boolean pageStatus) {
-		System.out.println("----------선택-----------");
-		System.out.println("1.제목 수정 2.내용 수정 ");
-		System.out.println("---------------------------");
+		
+		System.out.println("┌──────────────────────────┐");
+		System.out.println("│ 1.제목 수정  2.내용 수정 │");
+		System.out.println("└──────────────────────────┘");
 		System.out.print("번호를 입력하세요 >>> ");
 		int num = ScanUtil.nextInt();
 		System.out.print("수정 입력 >>> ");
