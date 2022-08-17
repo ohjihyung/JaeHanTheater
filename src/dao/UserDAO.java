@@ -25,7 +25,7 @@ public class UserDAO {
 	String sql = null;
 
 	public Map<String, Object> getUserInfo() {
-		Object userID = ControllerV2.userInfo.get("USER_TITLE");
+		Object userID = ControllerV2.userInfo.get("USER_ID");
 		sql = " SELECT * FROM CLIENT WHERE USER_ID='" + userID + "'";
 		Map<String, Object> row = jdbc.selectOne(sql);
 		return row;

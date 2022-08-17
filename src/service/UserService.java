@@ -62,15 +62,15 @@ public class UserService {
 	}
 
 	public int showStatus() {
-		Map<String, Object> userInfo = ControllerV2.userInfo;
+		Map<String, Object> info = ControllerV2.userInfo;
 		System.out.println("════════════ 내 정보 ════════════");
-		System.out.println("아이디 : " + userInfo.get("USER_ID"));
-		System.out.println("닉네임 : " + userInfo.get("USER_NICK"));
-		System.out.println("이름 : " + userInfo.get("USER_NAME"));
+		System.out.println("아이디 : " + info.get("USER_ID"));
+		System.out.println("닉네임 : " + info.get("USER_NICK"));
+		System.out.println("이름 : " + info.get("USER_NAME"));
 		System.out.print("생년월일 : ");
-		System.out.printf("%tF\n", userInfo.get("USER_BIRTH"));
-		System.out.println("전화번호 : " + userInfo.get("USER_PHONE"));
-		System.out.println("이메일 : " + userInfo.get("USER_EMAIL"));
+		System.out.printf("%tF\n", info.get("USER_BIRTH"));
+		System.out.println("전화번호 : " + info.get("USER_PHONE"));
+		System.out.println("이메일 : " + info.get("USER_EMAIL"));
 		System.out.println("═════════════════════════════════");
 		System.out.println("┌───────────────────────────────────────────────┐");
 		System.out.println("│  1. 회원정보 수정 2. 비밀번호 수정 0. 나가기  │");

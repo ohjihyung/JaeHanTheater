@@ -189,7 +189,7 @@ public class DramaService {
       if(Integer.parseInt(String.valueOf(row.get(0).get("THEATER_START"))) - Integer.parseInt(sdf.format(new Date()) ) > 0) { // 상영예정 
          System.out.println("1.리뷰 자세히 보기  0.홈으로 돌아가기");
          switch(ScanUtil.nextInt()) {
-         case 1: return View2.DRAMA_REVIEW;
+         case 1: return View2.REVIEW;
          case 0: selectedDrama = null; return View2.HOME;
          default : return View2.HOME;
          }
@@ -198,7 +198,7 @@ public class DramaService {
          // 상영종료 
          System.out.println("1.리뷰 자세히 보기 0.홈으로 돌아가기");
          switch(ScanUtil.nextInt()) {
-         case 1: return View2.DRAMA_REVIEW;
+         case 1: return View2.REVIEW;
          case 0: selectedDrama = null; return View2.HOME;
          default : return View2.HOME;
          }
@@ -206,7 +206,7 @@ public class DramaService {
       else {
          System.out.println("1.리뷰 자세히 보기 2.예매하기 0.홈으로 돌아가기");
          switch(ScanUtil.nextInt()) {
-         case 1: return View2.DRAMA_REVIEW;
+         case 1: return View2.REVIEW;
          case 2: if(ControllerV2.userInfo== null) {
             System.out.println("로그인후 이용가능"); return View2.HOME;
          }
