@@ -5,6 +5,8 @@ import java.util.Map;
 import service.RootService;
 import service.UserService;
 import service.BoardService;
+import service.DramaService;
+import service.ReviewService;
 import util.ScanUtil;
 import util.View2;
 
@@ -17,6 +19,8 @@ public class ControllerV2 {
 	RootService rootService = RootService.getInstance();
 	UserService userService = UserService.getInstance();
 	BoardService boardService = BoardService.getInstance();
+	DramaService dramaService = DramaService.getInstance();
+	ReviewService reviewService = ReviewService.getInstance();
 
 	public static void main(String[] args) {
 		new ControllerV2().start();
@@ -80,6 +84,39 @@ public class ControllerV2 {
 				break;
 			case View2.BOARD_DELETE:
 				view = boardService.deleteBoard(pageStatus);
+				break;
+				
+			case View2.DRAMA:
+	             view = dramaService.showDramaList(loggedInUser);
+	             break;
+	         case View2.DRAMA_INFO:
+	             view = dramaService.showDramaInfo();
+	             break;
+	         case View2.DRAMA_TICKETTING:
+	             view = dramaService.dramaTicketing();
+	             break;
+	         case View2.DRAMA_REVIEW:
+	             view = dramaService.dramaReview();
+	             break;
+	         case View2.DRAMA_REFUND:
+	             view = dramaService.ticketRefund();
+	             break;
+
+				
+			case View2.REVIEW:
+				view = reviewService.showReview();
+				break;
+			case View2.REVIEW_SELECT:
+				view = reviewService.selectReview();
+				break;
+			case View2.REVIEW_WRITE:
+				view = reviewService.writeReview();
+				break;
+			case View2.REVIEW_MODIFY:
+				view = reviewService.modifyReview();
+				break;
+			case View2.REVIEW_DELETE:
+				view = reviewService.deleteReview();
 				break;
 			}
 

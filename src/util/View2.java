@@ -29,6 +29,7 @@ public interface View2 {
 	int DRAMA = 4;
 	int DRAMA_INFO = 41;
 	int DRAMA_REVIEW = 42;
+	int DRAMA_REFUND = 43;
 	int DRAMA_TICKETTING = 44;
 
 	// 리뷰 -- 김슬기 // ReviewService, ReviewDAO
